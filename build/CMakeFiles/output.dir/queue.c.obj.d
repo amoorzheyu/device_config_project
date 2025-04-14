@@ -1,0 +1,23 @@
+CMakeFiles/output.dir/queue.c.obj: \
+ D:\CODE\vscode_code\device_config_project\queue.c \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/stdio.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/corecrt.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/_mingw.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/_mingw_mac.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/_mingw_secapi.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/vadefs.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/_mingw_off_t.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/swprintf.inl \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/stdlib.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/corecrt_wstdlib.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/lib/gcc/x86_64-w64-mingw32/10.3.0/include-fixed/limits.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/lib/gcc/x86_64-w64-mingw32/10.3.0/include-fixed/syslimits.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/limits.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/crtdefs.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/sec_api/stdlib_s.h \
+ D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/malloc.h \
+ D:\CODE\vscode_code\device_config_project\queue.h \
+ D:\CODE\vscode_code\device_config_project\config.h

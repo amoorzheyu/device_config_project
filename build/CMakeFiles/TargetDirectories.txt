@@ -1,0 +1,3 @@
+D:/CODE/vscode_code/device_config_project/build/CMakeFiles/output.dir
+D:/CODE/vscode_code/device_config_project/build/CMakeFiles/edit_cache.dir
+D:/CODE/vscode_code/device_config_project/build/CMakeFiles/rebuild_cache.dir

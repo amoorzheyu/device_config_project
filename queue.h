@@ -1,25 +1,32 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-// 队列节点结构体
+// 队列节点结构
 typedef struct QueueNode {
+    struct QueueNode *next;
+    int slave_start_address;
+    int data_length;
     int device_id;
-    int start_index;
-    int length;
-    struct QueueNode* next;
+    int config_start_id;
+    int config_end_id;
 } QueueNode;
 
-// 队列结构体
+// 队列结构体（链表头尾）
 typedef struct {
-    QueueNode* front;
-    QueueNode* rear;
+    QueueNode *front;
+    QueueNode *rear;
 } Queue;
 
 // 函数声明
-Queue* create_queue();                // 创建队列
-void enqueue(Queue* queue, int device_id, int start_index, int length);  // 入队操作
-int dequeue(Queue* queue);            // 出队操作
-int is_empty(Queue* queue);           // 判断队列是否为空
-void print_queue(Queue* queue);       // 打印队列内容
+void init_queue(Queue *q);
+int is_empty(Queue *q);
+void enqueue(Queue *q, QueueNode *item);
+QueueNode *dequeue(Queue *q);
+void free_queue(Queue *q);
 
-#endif // QUEUE_H
+QueueNode *create_node(int slave_start_address, int data_length, int device_id, int start_id, int end_id);
+void merge_or_add(Queue *q, QueueNode *new_item, int max_length);
+
+void print_queue(Queue *q);
+
+#endif

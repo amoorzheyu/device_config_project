@@ -8,20 +8,17 @@ typedef struct {
     int master_start_address; // 主机起始地址
 } SlaveConfig;
 
-// 每个设备ID对应一个配置数组
 #define MAX_DEVICES 10
-
-// 每个设备最多50个配置
 #define MAX_CONFIGS 50
-
-// 每个设备最多256个地址
 #define MAX_ADDRESS 256 
 
-// 所有从机设备的配置
 extern SlaveConfig device_configs[MAX_DEVICES][MAX_CONFIGS];
+extern SlaveConfig sorted_device_configs[MAX_CONFIGS]; // 用于保存排序后的结果
 
 // 函数声明
 void add_config(int device_id, int config_id, int slave_start_address, int data_length, int master_start_address);
 void print_configs(int device_id);
+void sort_configs_by_slave_address(int device_id);
+void print_sorted_configs();
 
 #endif

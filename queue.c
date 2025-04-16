@@ -64,57 +64,34 @@ void merge_or_add(Queue *q, QueueNode *new_item, int max_length) {
         return;
     }
 
-    // 获取最后一个节点
     QueueNode *last = q->rear;
 
-    // 同设备 + 地址连续或相交
     int last_end = last->slave_start_address + last->data_length;
     int new_start = new_item->slave_start_address;
     int new_end = new_item->slave_start_address + new_item->data_length;
 
-    if (last->device_id == new_item->device_id &&
-        last_end >= new_start) {  // 允许连续或重叠
-
+    if (last->device_id == new_item->device_id && last_end >= new_start) {
         int merged_start = last->slave_start_address;
         int merged_ideal_end = (new_end > last_end) ? new_end : last_end;
         int merged_total_len = merged_ideal_end - merged_start;
 
         if (merged_total_len <= max_length) {
-            //  合并整个区域
             last->data_length = merged_total_len;
+
+            // ✅ 修复关键点：更新 start_id 和 end_id
+            if (new_item->config_start_id < last->config_start_id)
+                last->config_start_id = new_item->config_start_id;
             if (new_item->config_end_id > last->config_end_id)
                 last->config_end_id = new_item->config_end_id;
+
             free(new_item);
             return;
         } else {
-            //  超出 max_length，仅合并部分
-            int appendable_len = max_length - last->data_length;
-            if (appendable_len > 0) {
-                last->data_length += appendable_len;
-                last->config_end_id = new_item->config_end_id;
-
-                // 创建剩余部分
-                int remaining_len = new_item->data_length - appendable_len;
-                int remaining_start = new_item->slave_start_address + appendable_len;
-
-                QueueNode *split_part = create_node(
-                    remaining_start,
-                    remaining_len,
-                    new_item->device_id,
-                    new_item->config_start_id,
-                    new_item->config_end_id
-                );
-                enqueue(q, split_part);
-            } else {
-                enqueue(q, new_item);
-                return;
-            }
-            free(new_item);
+            enqueue(q, new_item);
             return;
         }
     }
 
-    // 设备不同 或地址不连续：直接入队
     enqueue(q, new_item);
 }
 

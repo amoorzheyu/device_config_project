@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/output.dir/main.c.obj.d"
   "CMakeFiles/output.dir/queue.c.obj"
   "CMakeFiles/output.dir/queue.c.obj.d"
+  "CMakeFiles/output.dir/slave.c.obj"
+  "CMakeFiles/output.dir/slave.c.obj.d"
   "D:/CODE/vscode_code/device_config_project/output.exe"
   "D:/CODE/vscode_code/device_config_project/output.exe.manifest"
   "D:/CODE/vscode_code/device_config_project/output.pdb"

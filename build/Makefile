@@ -224,6 +224,30 @@ queue.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\output.dir\build.make CMakeFiles/output.dir/queue.c.s
 .PHONY : queue.c.s
 
+slave.obj: slave.c.obj
+.PHONY : slave.obj
+
+# target to build an object file
+slave.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\output.dir\build.make CMakeFiles/output.dir/slave.c.obj
+.PHONY : slave.c.obj
+
+slave.i: slave.c.i
+.PHONY : slave.i
+
+# target to preprocess a source file
+slave.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\output.dir\build.make CMakeFiles/output.dir/slave.c.i
+.PHONY : slave.c.i
+
+slave.s: slave.c.s
+.PHONY : slave.s
+
+# target to generate assembly for a file
+slave.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\output.dir\build.make CMakeFiles/output.dir/slave.c.s
+.PHONY : slave.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -245,6 +269,9 @@ help:
 	@echo ... queue.obj
 	@echo ... queue.i
 	@echo ... queue.s
+	@echo ... slave.obj
+	@echo ... slave.i
+	@echo ... slave.s
 .PHONY : help
 
 

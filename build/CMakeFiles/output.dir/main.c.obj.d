@@ -21,4 +21,5 @@ CMakeFiles/output.dir/main.c.obj: \
  D:/softwareLibrary/ProgrammingEnvironment/TDM-GCC/x86_64-w64-mingw32/include/malloc.h \
  D:\CODE\vscode_code\device_config_project\config.h \
  D:\CODE\vscode_code\device_config_project\gateway.h \
- D:\CODE\vscode_code\device_config_project\queue.h
+ D:\CODE\vscode_code\device_config_project\queue.h \
+ D:\CODE\vscode_code\device_config_project\slave.h

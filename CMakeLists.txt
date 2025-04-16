@@ -9,6 +9,7 @@ set(SOURCES
     main.c
     queue.c
     gateway.c
+    slave.c
 )
 
 # 设置输出路径为源代码所在目录

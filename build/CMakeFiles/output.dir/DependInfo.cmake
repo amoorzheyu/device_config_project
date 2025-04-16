@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/CODE/vscode_code/device_config_project/gateway.c" "CMakeFiles/output.dir/gateway.c.obj" "gcc" "CMakeFiles/output.dir/gateway.c.obj.d"
   "D:/CODE/vscode_code/device_config_project/main.c" "CMakeFiles/output.dir/main.c.obj" "gcc" "CMakeFiles/output.dir/main.c.obj.d"
   "D:/CODE/vscode_code/device_config_project/queue.c" "CMakeFiles/output.dir/queue.c.obj" "gcc" "CMakeFiles/output.dir/queue.c.obj.d"
+  "D:/CODE/vscode_code/device_config_project/slave.c" "CMakeFiles/output.dir/slave.c.obj" "gcc" "CMakeFiles/output.dir/slave.c.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

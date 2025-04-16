@@ -84,12 +84,12 @@ clean: CMakeFiles/output.dir/clean
 CMakeFiles/output.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\output.dir\build.make CMakeFiles/output.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\output.dir\build.make CMakeFiles/output.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\CODE\vscode_code\device_config_project\build\CMakeFiles --progress-num=1,2,3,4,5 "Built target output"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\CODE\vscode_code\device_config_project\build\CMakeFiles --progress-num=1,2,3,4,5,6 "Built target output"
 .PHONY : CMakeFiles/output.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/output.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\CODE\vscode_code\device_config_project\build\CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\CODE\vscode_code\device_config_project\build\CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/output.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\CODE\vscode_code\device_config_project\build\CMakeFiles 0
 .PHONY : CMakeFiles/output.dir/rule
@@ -101,7 +101,7 @@ output: CMakeFiles/output.dir/rule
 # codegen rule for target.
 CMakeFiles/output.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\output.dir\build.make CMakeFiles/output.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\CODE\vscode_code\device_config_project\build\CMakeFiles --progress-num=1,2,3,4,5 "Finished codegen for target output"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\CODE\vscode_code\device_config_project\build\CMakeFiles --progress-num=1,2,3,4,5,6 "Finished codegen for target output"
 .PHONY : CMakeFiles/output.dir/codegen
 
 # clean rule for target.

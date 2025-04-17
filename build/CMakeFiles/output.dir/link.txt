@@ -1,3 +1,0 @@
-D:\softwareLibrary\ProgrammingEnvironment\cmake-4.0.0-rc3-windows-x86_64\bin\cmake.exe -E rm -f CMakeFiles\output.dir/objects.a
-D:\softwareLibrary\ProgrammingEnvironment\TDM-GCC\bin\ar.exe qc CMakeFiles\output.dir/objects.a @CMakeFiles\output.dir\objects1.rsp
-D:\softwareLibrary\ProgrammingEnvironment\TDM-GCC\bin\gcc.exe -Wl,--whole-archive CMakeFiles\output.dir/objects.a -Wl,--no-whole-archive -o D:\CODE\vscode_code\device_config_project\output.exe -Wl,--out-implib,liboutput.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\output.dir\linkLibs.rsp

@@ -5,7 +5,7 @@
 #include <stdlib.h> // 用于退出程序
 
 //网关最大地址
-#define MAX_ADDRESS 300
+#define MAX_ADDRESS 1200
 
 //模拟网关数组
 extern int gateway_addresses[MAX_ADDRESS];

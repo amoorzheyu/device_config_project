@@ -10,7 +10,6 @@ void read_configs();
 void sort_all_configs();
 void print_all_sorted_configs();
 void test_get_slave_addresses();
-
 int main() {
     Queue q;                  // 创建队列实例
     init_queue(&q);           // 初始化队列
@@ -21,6 +20,7 @@ int main() {
     sort_all_configs();       // 对每个设备配置排序
     print_all_sorted_configs(); // 仅打印排序后的配置（调试用）
 
+    
     process_sorted_configs(&q, 120); // 利用排序结果生成队列元素
 
     printf("------------------------------------队列元素：\n");

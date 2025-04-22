@@ -23,14 +23,16 @@ void process_sorted_configs(Queue *q, int max_length)
                 config->slave_start_address,
                 config->data_length,
                 device_id,
-                config->config_id,  // config_start_id
-                config->config_id   // config_end_id（只有自己）
+                i, // sort_config_start_index
+                i  // sort_config_end_index
             );
+
             // 加入队列（合并由 merge_or_add 控制）
             merge_or_add(q, node, max_length);
         }
     }
 }
+
 
 
 // 根据起始地址、长度和数据数组将数据依次赋值给网关数组
@@ -76,70 +78,63 @@ void process_device_configs(Queue *q, SlaveConfig device_configs[MAX_DEVICES][MA
     while (current_node != NULL)
     {
         int device_id = current_node->device_id;
-        int slave_start_address = current_node->slave_start_address;
-        int data_length = current_node->data_length;
-        int config_start_id = current_node->config_start_id;
-        int config_end_id = current_node->config_end_id;
+        int node_start = current_node->slave_start_address;
+        int node_length = current_node->data_length;
+        int node_end = node_start + node_length;
 
         // 获取从机数据
-        int *data = get_slave_addresses(device_id, slave_start_address, data_length);
-
+        int *data = get_slave_addresses(device_id, node_start, node_length);
         if (data == NULL)
         {
             fprintf(stderr, "Error: Failed to get slave addresses for device %d.\n", device_id);
             exit(EXIT_FAILURE);
         }
 
-        // data切片索引
-        int var_data_start_index = 0;
-        int var_data_end_index = 0;
-        int var_data_length = 0;
-        int var_master_start_address = 0;
-
-        // 遍历配置段
-        for (int config_id = config_start_id; config_id <= config_end_id; ++config_id)
+        // 遍历整个设备的配置，找与当前 node 有交集的配置
+        for (int config_id = 0; config_id < MAX_CONFIGS; ++config_id)
         {
             SlaveConfig *config = &device_configs[device_id][config_id];
+            if (config->slave_start_address == -1)
+                continue;
 
-            if (config_id == config_start_id)
-            {
-                var_data_start_index = 0;
-                var_data_end_index = config->data_length - 1;
-            }
-            else
-            {
-                SlaveConfig *lastConfig = &device_configs[device_id][config_id - 1];
-                var_data_start_index += lastConfig->data_length;
-                var_data_end_index += config->data_length;
-            }
+            int config_start = config->slave_start_address;
+            int config_length = config->data_length;
+            int config_end = config_start + config_length;
 
-            var_data_length = var_data_end_index - var_data_start_index + 1;
-            var_master_start_address = config->master_start_address;
+            // 跳过不重叠的部分
+            if (config_end <= node_start || config_start >= node_end)
+                continue;
 
-            // 越界检查
-            if (var_data_length <= 0 || var_data_start_index + var_data_length > data_length)
-            {
-                fprintf(stderr, "Invalid data slice: start=%d, length=%d, total=%d\n",
-                        var_data_start_index, var_data_length, data_length);
-                exit(EXIT_FAILURE);
-            }
+            // 找出交集
+            int overlap_start = (config_start > node_start) ? config_start : node_start;
+            int overlap_end = (config_end < node_end) ? config_end : node_end;
+            int overlap_len = overlap_end - overlap_start;
 
-            int *slice_data = malloc(var_data_length * sizeof(int));
+            if (overlap_len <= 0)
+                continue;
+
+            // 在 data[] 中的起始位置
+            int data_offset = overlap_start - node_start;
+
+            int *slice_data = malloc(overlap_len * sizeof(int));
             if (!slice_data)
             {
-                fprintf(stderr, "Memory allocation failed (length=%d).\n", var_data_length);
+                fprintf(stderr, "Memory allocation failed (length=%d).\n", overlap_len);
                 exit(EXIT_FAILURE);
             }
 
-            memcpy(slice_data, &data[var_data_start_index], var_data_length * sizeof(int));
+            memcpy(slice_data, &data[data_offset], overlap_len * sizeof(int));
 
-            // 写入网关数组
-            assign_gateway_data(var_master_start_address, var_data_length, slice_data);
+            // 网关目标地址偏移 = 当前 overlap 在 config 中的偏移
+            int master_offset = overlap_start - config_start;
+            int gateway_address = config->master_start_address + master_offset;
 
-            // ✅ 一定要释放！
+            assign_gateway_data(gateway_address, overlap_len, slice_data);
+
             free(slice_data);
         }
 
         current_node = current_node->next;
     }
 }
+

@@ -64,6 +64,16 @@ void print_configs(int device_id) {
 int compare_by_slave_address(const void *a, const void *b) {
     const SlaveConfig *configA = (const SlaveConfig *)a;
     const SlaveConfig *configB = (const SlaveConfig *)b;
+
+    // 把无效的（长度为 0 或起始地址为 0）排在最后
+    int validA = (configA->data_length > 0 && configA->slave_start_address > 0);
+    int validB = (configB->data_length > 0 && configB->slave_start_address > 0);
+
+    if (validA && !validB) return -1; // A 有效，B 无效 => A 前
+    if (!validA && validB) return 1;  // A 无效，B 有效 => B 前
+    if (!validA && !validB) return 0; // 都无效 => 相等
+
+    // 都有效，按起始地址升序排
     return configA->slave_start_address - configB->slave_start_address;
 }
 

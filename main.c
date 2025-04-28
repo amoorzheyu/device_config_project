@@ -10,6 +10,7 @@ void read_configs();
 void sort_all_configs();
 void print_all_sorted_configs();
 void test_get_slave_addresses();
+void test_replace_slave_data();
 int main() {
     Queue q;                  // 创建队列实例
     init_queue(&q);           // 初始化队列
@@ -19,8 +20,8 @@ int main() {
     read_configs();           // 读取配置文件
     sort_all_configs();       // 对每个设备配置排序
     print_all_sorted_configs(); // 仅打印排序后的配置（调试用）
-
     
+    /* 生成队列元素 
     process_sorted_configs(&q, 120); // 利用排序结果生成队列元素
 
     printf("------------------------------------队列元素：\n");
@@ -30,11 +31,23 @@ int main() {
     print_gateway_addresses();
 
     free_queue(&q);           // 清理分配的内存
+    */
+
+    test_replace_slave_data();
     getchar();
     
     return 0;
 }
 
+
+void test_replace_slave_data(){
+    //生成一个数组分配700长度
+    int *data_arr= (int*)malloc(200*sizeof(int));
+    for(int i=0; i<200; i++){
+        data_arr[i]=i;
+    }
+    replace_slave_data(50, 200, data_arr);
+}
 void test_get_slave_addresses(){
      // 测试返回内容
     int* arr= get_slave_addresses(1, 100, 4);

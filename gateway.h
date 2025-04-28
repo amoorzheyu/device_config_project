@@ -15,6 +15,11 @@ extern int gateway_addresses[MAX_ADDRESS];
 // 处理排序后的配置，并将其存入队列
 void process_sorted_configs(Queue *q, int max_length);
 
+// 使用下发数据替换从机数据
+void replace_slave_data(int master_start_address,
+    int master_data_length,
+    int master_data[]);
+
 // 新函数：根据起始地址、长度和数据数组将数据赋值给网关数组
 void assign_gateway_data(int start_index, int length, int data[]);
 

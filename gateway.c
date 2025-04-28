@@ -7,6 +7,64 @@
 
 int gateway_addresses[MAX_ADDRESS] = {0};
 
+void replace_slave_data(int master_start_address,
+                        int master_data_length,
+                        int master_data[])
+{
+    int range_start = master_start_address;
+    int range_end = master_start_address + master_data_length - 1;
+
+    // 遍历设备与其配置表
+    for (int dev = 0; dev < MAX_DEVICES; dev++)
+    {
+        for (int cfg = 0; cfg < MAX_CONFIGS; cfg++)
+        {
+            const SlaveConfig *c = &sorted_device_configs[dev][cfg];
+
+            // 跳过未定义的配置
+            if (c->slave_start_address == -1)
+            {
+                continue;
+            }
+
+            int m0 = c->master_start_address;
+            int m1 = m0 + c->data_length - 1;
+
+            // 计算主机地址区间 [range_start, range_end] 与 [m0, m1] 的交集
+            int ov_start = (m0 > range_start) ? m0 : range_start;
+            int ov_end = (m1 < range_end) ? m1 : range_end;
+
+            if (ov_start > ov_end)
+                continue; // 无重叠，跳过
+
+            // 相交长度
+            int overlap_length = ov_end - ov_start + 1;
+
+            //相交开始位置相对于数据起始位置的下标
+            int data_offset = ov_start - c->master_start_address;
+
+            //从机起始地址
+            int slave_start_address = c->slave_start_address+data_offset;
+
+            //使用memcpy截取master_data中data_offset下标开始，长度为overlap_length的数据长度
+            int *slice_data = malloc(overlap_length * sizeof(int));
+            memcpy(slice_data, master_data+(ov_start-range_start), overlap_length * sizeof(int)); 
+
+            //打印偏移量
+            printf("偏移量：%d\n", data_offset);
+
+            //打印相关信息：从机设备号，从机起始地址，数据长度，数据数组
+            printf("设备号： %d, 配置id:%d,从机起始地址: %d, 数据长度: %d, 数据: \n", dev,cfg, slave_start_address, overlap_length);
+
+            for (int i = 0; i < overlap_length; i++)
+            {
+                printf("%d ", slice_data[i]);
+            }
+            printf("\n");
+        }
+    }
+}
+
 // 处理排序后的配置，存入队列
 void process_sorted_configs(Queue *q, int max_length)
 {
@@ -32,8 +90,6 @@ void process_sorted_configs(Queue *q, int max_length)
         }
     }
 }
-
-
 
 // 根据起始地址、长度和数据数组将数据依次赋值给网关数组
 void assign_gateway_data(int start_index, int length, int data[])
@@ -137,4 +193,3 @@ void process_device_configs(Queue *q, SlaveConfig device_configs[MAX_DEVICES][MA
         current_node = current_node->next;
     }
 }
-

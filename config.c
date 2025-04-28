@@ -6,6 +6,7 @@
 SlaveConfig device_configs[MAX_DEVICES][MAX_CONFIGS];
 SlaveConfig sorted_device_configs[MAX_DEVICES][MAX_CONFIGS];
 
+
 // 初始化设备配置数组
 void init_device_configs() {
     for (int i = 0; i < MAX_DEVICES; i++) {
